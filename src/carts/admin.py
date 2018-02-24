@@ -3,4 +3,9 @@ from django.contrib import admin
 from .models import Cart
 
 
-admin.site.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'updated', 'timestamp']
+    search_fields = ['user']
+
+
+admin.site.register(Cart, CartAdmin)
