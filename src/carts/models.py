@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save, m2m_changed
@@ -50,8 +52,7 @@ class CartManager(models.Manager):
                     cart_obj.user = request.user
                     cart_obj.save()
         else:
-            cart_obj = Cart.objects.new(user=request.user)
-            new_obj = True
+            cart_obj, new_obj = Cart.objects.new(user=request.user)
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
@@ -61,9 +62,12 @@ class CartManager(models.Manager):
             if user.is_authenticated():
                 cart_obj = self.model.objects.filter(user=user).first()
                 if cart_obj is not None:
-                    return cart_obj
-                user_obj = user
-        return self.model.objects.create(user=user_obj)
+                    new_obj = False
+                    return cart_obj, new_obj
+                else:
+                    new_obj = True
+                    user_obj = user
+        return self.model.objects.create(user=user_obj), new_obj
 
 
 class Cart(models.Model):
@@ -96,7 +100,7 @@ m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 def pre_save_cart_receiver(sender, instance, *args, **kwargs):
     if instance.subtotal > 0:
-        instance.total = instance.subtotal + 10
+        instance.total = Decimal(instance.subtotal) * Decimal(1.08)
     else:
         instance.total = 0.00
 
