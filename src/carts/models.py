@@ -58,6 +58,7 @@ class CartManager(models.Manager):
 
     def new(self, user=None):
         user_obj = None
+        new_obj = True
         if user is not None:
             if user.is_authenticated():
                 cart_obj = self.model.objects.filter(user=user).first()
@@ -67,6 +68,7 @@ class CartManager(models.Manager):
                 else:
                     new_obj = True
                     user_obj = user
+                    return self.model.objects.create(user=user_obj), new_obj
         return self.model.objects.create(user=user_obj), new_obj
 
 
