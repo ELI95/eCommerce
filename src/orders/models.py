@@ -46,7 +46,6 @@ class Order(models.Model):
     status = models.CharField(max_length=100, default='created', choices=ORDER_STATUS_CHOICES)
     shipping_total = models.DecimalField(max_digits=50, decimal_places=2, default=5.99)
     total = models.DecimalField(max_digits=50, decimal_places=2, default=0.00)
-    billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
