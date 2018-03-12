@@ -16,7 +16,6 @@ $(document).ready(function(){
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
-
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -28,5 +27,4 @@ $(document).ready(function(){
             }
         }
     });
-
 })
