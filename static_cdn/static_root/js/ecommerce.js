@@ -238,7 +238,4 @@ $(document).ready(function(){
 
 
   }
-
-
-
 })
