@@ -1,0 +1,106 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "super",
+        "slug": "super",
+        "description": "super is good",
+        "price": "12.22",
+        "image": "products/7919267312612/7919267312612.png",
+        "featured": false,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "lunch",
+        "slug": "lunch",
+        "description": "lunch is important",
+        "price": "12.22",
+        "image": "products/2141040077156/2141040077156.png",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "breakfast",
+        "slug": "breakfast",
+        "description": "Father leaves for work in the morning after breakfast.",
+        "price": "39.99",
+        "image": "products/8987027015292/8987027015292.png",
+        "featured": false,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "tea",
+        "slug": "tea",
+        "description": "hello, i am tea ~",
+        "price": "10.00",
+        "image": "products/3313625271/3313625271.png",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "siren",
+        "slug": "siren-47wx",
+        "description": "i  have no image ~",
+        "price": "39.99",
+        "image": "",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "title": "featured_product",
+        "slug": "featured_product",
+        "description": "i am featured ~",
+        "price": "39.99",
+        "image": "",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+        "title": "title to generate slug",
+        "slug": "title-to-generate-slug-yrz3",
+        "description": "title to generate slug ~",
+        "price": "39.99",
+        "image": "",
+        "featured": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "sauce",
+        "slug": "sauce",
+        "description": "flavorful relish or dressing or topping served as an accompaniment to food",
+        "price": "2.00",
+        "image": "products/8802286772/8802286772.jpg",
+        "featured": false,
+        "active": true
+    }
+}
+]
