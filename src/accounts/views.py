@@ -6,6 +6,7 @@ from django.views.generic import CreateView, FormView
 
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
+from .signals import user_logged_in
 
 
 class LoginView(FormView):
@@ -23,6 +24,7 @@ class LoginView(FormView):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
+            user_logged_in.send(user.__class__, instance=user, request=request)
             try:
                 del request.session['guest_email_id']
             except:
