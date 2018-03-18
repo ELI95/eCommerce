@@ -17,7 +17,7 @@ class LoginView(FormView):
         request = self.request
         next_ = request.GET.get('next')
         next_post = request.POST.get('next')
-        redirect_path = next_ or next_ or None
+        redirect_path = next_ or next_post or None
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(request, username=email, password=password)
@@ -37,7 +37,7 @@ class LoginView(FormView):
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
-    success_url = '/'
+    success_url = '/login/'
 
 
 def guest_register_view(request):
