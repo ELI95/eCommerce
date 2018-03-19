@@ -35,6 +35,21 @@ User = settings.AUTH_USER_MODEL
 
 
 class CartManager(models.Manager):
+    def new(self, user=None):
+        user_obj = None
+        new_obj = True
+        if user is not None:
+            if user.is_authenticated():
+                cart_obj = self.model.objects.filter(user=user).first()
+                if cart_obj is not None:
+                    new_obj = False
+                    return cart_obj, new_obj
+                else:
+                    new_obj = True
+                    user_obj = user
+                    return self.model.objects.create(user=user_obj), new_obj
+        return self.model.objects.create(user=user_obj), new_obj
+
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
         qs = self.get_queryset().filter(id=cart_id)
@@ -55,21 +70,6 @@ class CartManager(models.Manager):
             cart_obj, new_obj = Cart.objects.new(user=request.user)
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
-
-    def new(self, user=None):
-        user_obj = None
-        new_obj = True
-        if user is not None:
-            if user.is_authenticated():
-                cart_obj = self.model.objects.filter(user=user).first()
-                if cart_obj is not None:
-                    new_obj = False
-                    return cart_obj, new_obj
-                else:
-                    new_obj = True
-                    user_obj = user
-                    return self.model.objects.create(user=user_obj), new_obj
-        return self.model.objects.create(user=user_obj), new_obj
 
 
 class Cart(models.Model):
