@@ -69,7 +69,7 @@ class UserSession(models.Model):
 
 def post_save_session_receiver(sender, instance, created, *args, **kwargs):
     if created:
-        qs = UserSession.objects.filter(user=instance.user, ended=False,  active=False).exclude(id=instance.id)
+        qs = UserSession.objects.filter(user=instance.user, ended=False, active=False).exclude(id=instance.id)
         for i in qs:
             i.end_session()
     if not instance.active and not instance.ended:
