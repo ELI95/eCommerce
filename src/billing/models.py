@@ -2,6 +2,7 @@ import stripe
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save
+from django.core.urlresolvers import reverse
 
 from accounts.models import GuestEmail
 
@@ -47,6 +48,9 @@ class BillingProfile(models.Model):
     def get_cards(self):
         return self.card_set.all()
 
+    def get_payment_menthod_url(self):
+        return reverse('billing-payment-method')
+
     @property
     def has_card(self):
         card_qs = self.get_cards()
@@ -54,10 +58,15 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        default_cards = self.get_carts().filter(default=True)
+        default_cards = self.get_carts().filter(active=True, default=True)
         if default_cards.exists():
             return default_cards.first()
         return None
+
+    def set_carts_inactive(self):
+        cards_qs = self.get_cards()
+        cards_qs.update(active=False)
+        return cards_qs.filter(activee=True).count()
 
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
@@ -80,6 +89,9 @@ post_save.connect(user_created_receiver, sender=User)
 
 
 class CardManager(models.Manager):
+    def all(self, *args, **kwargs):
+        return self.get_queryset().filter(active=True)
+
     def add_new(self, billing_profile, token):
         if token:
             customer = stripe.Customer.retrieve(billing_profile.customer_id)
@@ -107,6 +119,8 @@ class Card(models.Model):
     exp_year = models.IntegerField(blank=True, null=True)
     last4 = models.CharField(max_length=4, blank=True, null=True)
     default = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = CardManager()
 
@@ -114,11 +128,21 @@ class Card(models.Model):
         return "{} {}".format(self.brand, self.last4)
 
 
+def new_card_post_save_receiver(sender, instance, created, *args, **kwargs):
+    if instance.default:
+        billing_profile = instance.billing_profile
+        qs = Card.objects.filter(billing_profile=billing_profile).exclude(pk=instance.pk)
+        qs.update(default=False)
+
+
+post_save.connect(new_card_post_save_receiver, sender=Card)
+
+
 class ChargeManager(models.Manager):
-    def do(self, billing_profile, order_obj, card=None): # Charge.objects.do()
+    def do(self, billing_profile, order_obj, card=None):
         card_obj = card
         if card_obj is None:
-            cards = billing_profile.card_set.filter(default=True) # card_obj.billing_profile
+            cards = billing_profile.card_set.filter(default=True)
             if cards.exists():
                 card_obj = cards.first()
         if card_obj is None:

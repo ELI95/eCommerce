@@ -29,12 +29,12 @@
       <td colspan="2"></td>
       <td><b>Total</b> $<span class='cart-total'>{{ cart.total }}</span></td>
     </tr>
-    <tr>
-      <td colspan="2"></td>
-      <td><a class='btn btn-lg btn-success' href='{% url "cart:checkout" %}'>Checkout</a></td>
-    </tr>
+    <tr></tr>
 
   </tbody>
+      <td colspan="2"></td>
+      <td><a class='btn btn-lg btn-success' href='{% url "cart:checkout" %}'>Checkout</a></td>
+
 </table>
 <div class='cart-item-remove-form' style='display:none'>
   {% include 'carts/snippets/remove-product.html' %}

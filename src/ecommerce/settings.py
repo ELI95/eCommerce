@@ -31,6 +31,21 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'helloworld.eli@gmail.com'
+EMAIL_HOST_PASSWORD = 'Google123456'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Python ecommerce <elloworld.eli@gmail.com>'
+BASE_URL = '127.0.0.1:8000'
+
+
+MANAGERS = (
+    ('Eli Evans', "elloworld.eli@gmail.com"),
+)
+ADMINS = MANAGERS
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,14 +64,29 @@ INSTALLED_APPS = [
     'accounts',
     'addresses',
     'analytics',
+    'marketing',
 ]
 
 
 AUTH_USER_MODEL = 'accounts.User'
 
 
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/'
+lOGOUT_URL = '/logout'
+
+
 FORCE_SESSION_TO_ONE = True
 FORCE_INACTIVE_USER_ENDSESSION= False
+
+
+MAILCHIMP_API_KEY = "b70964a00e06386839d6125b44d95d66-us12"
+MAILCHIMP_DATA_CENTER = "us12"
+MAILCHIMP_EMAIL_LIST_ID = "7e958f5369"
+
+
+STRIPE_SECRET_KEY = "sk_test_cu1lQmcg1OLffhLvYrSCp5XE"
+STRIPE_PUB_KEY = 'pk_test_PrV61avxnHaWIYZEeiYTTVMZ'
 
 
 MIDDLEWARE = [
@@ -69,8 +99,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 LOGOUT_REDIRECT_URL = '/login/'
 ROOT_URLCONF = 'ecommerce.urls'
+
 
 TEMPLATES = [
     {
