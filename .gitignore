@@ -111,4 +111,4 @@ ENV/
 .mypy_cache/
 .idea/
 *.sublime-project
-src/ecommerce/settings
+src/ecommerce/settings/
