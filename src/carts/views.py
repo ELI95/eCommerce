@@ -8,7 +8,7 @@ from products.models import Product
 from orders.models import Order
 from billing.models import BillingProfile
 from accounts.forms import LoginForm, GuestForm
-from addresses.forms import AddressForm
+from addresses.forms import AddressCheckoutForm
 from addresses.models import Address
 
 
@@ -67,9 +67,9 @@ def checkout_home(request):
     if cart_created or cart_obj.products.count() == 0:
         return redirect('cart:home')
 
-    login_form = LoginForm()
-    guest_form = GuestForm()
-    address_form = AddressForm()
+    login_form = LoginForm(request=request)
+    guest_form = GuestForm(request=request)
+    address_form = AddressCheckoutForm()
     shipping_address_id = request.session.get("shipping_address_id", None)
     billing_address_id = request.session.get("billing_address_id", None)
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
