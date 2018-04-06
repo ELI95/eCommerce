@@ -94,6 +94,10 @@ class Product(models.Model):
     def name(self):
         return self.title
 
+    @property
+    def viewed(self):
+        return self.productanalytic.viewed
+
 
 # def product_pre_save_receiver(sender, instance, *args, **kwargs):
 #     if not instance.slug:

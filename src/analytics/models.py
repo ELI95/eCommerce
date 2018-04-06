@@ -8,12 +8,29 @@ from django.db.models.signals import pre_save, post_save
 from .signals import object_viewed_signal
 from .utils import get_client_ip
 from accounts.signals import user_logged_in
+from products.models import Product
 
 
 User = settings.AUTH_USER_MODEL
 
 FORCE_SESSION_TO_ONE = getattr(settings, 'FORCE_SESSION_TO_ONE', False)
 FORCE_INACTIVE_USER_ENDSESSION = getattr(settings, 'FORCE_INACTIVE_USER_ENDSESSION', False)
+
+
+class ProductAnalytic(models.Model):
+    product = models.OneToOneField(Product)
+    viewed = models.PositiveIntegerField(default=0, blank=True, null=True)
+
+    def __str__(self):
+        return '%s has been viewed %s times' %(self.product.title, self.viewed)
+
+
+def post_save_product_analytic_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        ProductAnalytic.objects.create(product=instance)
+
+
+post_save.connect(post_save_product_analytic_receiver, sender=Product)
 
 
 class ObjectViewedQuerySet(models.query.QuerySet):
@@ -45,7 +62,7 @@ class ObjectViewed(models.Model):
     objects = ObjectViewedManager()
 
     def __str__(self):
-        return '%s viewd on %s' %(self.content_object, self.timestamp)
+        return '%s viewed on %s' %(self.content_object, self.timestamp)
 
     class Meta:
         ordering = ['-timestamp']
