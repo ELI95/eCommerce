@@ -112,3 +112,4 @@ ENV/
 .idea/
 *.sublime-project
 src/ecommerce/settings/
+static_cdn/
