@@ -57,7 +57,7 @@ def get_month_data_range(months_ago=1, include_this_month=False):
     return dates_ 
 
 
-def get_filename(path):  # /abc/filename.mp4
+def get_filename(path):
     return os.path.basename(path)
 
 

@@ -33,6 +33,7 @@ from addresses.views import (
 from billing.views import payment_method_view, payment_method_createview
 from carts.views import cart_detail_api_view
 from marketing.views import MarketingPreferenceUpdateView, MailchimpWebhookView
+from orders.views import LibraryView
 
 
 urlpatterns = [
@@ -64,6 +65,7 @@ urlpatterns = [
     url(r'^addresses/$', AddressListView.as_view(), name='addresses'),
     url(r'^addresses/create/$', AddressCreateView.as_view(), name='address-create'),
     url(r'^addresses/(?P<pk>\d+)/$', AddressUpdateView.as_view(), name='address-update'),
+    url(r'^library/$', LibraryView.as_view(), name='library'),
 ]
 
 

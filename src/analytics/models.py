@@ -49,8 +49,8 @@ class ObjectViewed(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
-        verbose_name = 'Object viewed'
-        verbose_name_plural = 'Objects viewed'
+        verbose_name = 'object viewed'
+        verbose_name_plural = 'objects viewed'
 
 
 def object_viewed_receiver(sender, instance, request, *args, **kwargs):

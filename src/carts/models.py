@@ -88,8 +88,8 @@ class Cart(models.Model):
     @property
     def is_digital(self):
         qs = self.products.all()
-        new_qs = qs.filter(id_digital=False)
-        if new_qs.exist():
+        new_qs = qs.filter(is_digital=False)
+        if new_qs.exists():
             return False
         return True
 
@@ -116,3 +116,4 @@ def pre_save_cart_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_cart_receiver, sender=Cart)
+
