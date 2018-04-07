@@ -7,8 +7,8 @@ from django.utils.http import is_safe_url
 from .models import BillingProfile, Card
 
 
-STRIPE_SECRET_KEY = getattr(settings, "STRIPE_SECRET_KEY", 'sk_test_ijoWCWU9y6G1aNWrEkzoalfB')
-STRIPE_PUB_KEY = getattr(settings, "STRIPE_PUB_KEY", 'pk_test_MxXmaTWkQdhdwK1tv1M9tCdN')
+STRIPE_SECRET_KEY = getattr(settings, "STRIPE_SECRET_KEY")
+STRIPE_PUB_KEY = getattr(settings, "STRIPE_PUB_KEY")
 stripe.api_key = STRIPE_SECRET_KEY
 
 
