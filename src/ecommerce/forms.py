@@ -1,5 +1,7 @@
-from  django import forms
+from django import forms
 from django.contrib.auth import get_user_model
+
+from .custom_fields import LongerTextField
 
 
 User = get_user_model()
@@ -22,7 +24,7 @@ class ContactForm(forms.Form):
             }
         )
     )
-    content = forms.CharField(
+    content = LongerTextField(
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control',

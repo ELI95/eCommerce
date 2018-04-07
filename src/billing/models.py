@@ -48,7 +48,7 @@ class BillingProfile(models.Model):
     def get_cards(self):
         return self.card_set.all()
 
-    def get_payment_menthod_url(self):
+    def get_payment_method_url(self):
         return reverse('billing-payment-method')
 
     @property
@@ -58,7 +58,7 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        default_cards = self.get_carts().filter(active=True, default=True)
+        default_cards = self.get_cards().filter(active=True, default=True)
         if default_cards.exists():
             return default_cards.first()
         return None
