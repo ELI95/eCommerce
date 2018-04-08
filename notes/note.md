@@ -28,7 +28,7 @@ python manage.py dumpdata products  --format json --indent 4 > products/fixtures
 ```
 
 ## recommendation
-1. recommendation
+1. UserBasedCF
 ```python
 for user, products in train_set.items():
     for product in products:
