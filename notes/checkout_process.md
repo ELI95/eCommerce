@@ -23,8 +23,9 @@
 
 
 4. Backup Fixtures
-    python manage.py dumpdata products  --format json --indent 4 > products/fixtures/products.json
-
+```bash
+python manage.py dumpdata products  --format json --indent 4 > products/fixtures/products.json
+```
 
 5. recommendation
 ```python
