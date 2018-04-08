@@ -1,4 +1,4 @@
-# Checkout Process
+## Checkout Process
 
 1. Cart -> Checkout View
     ?
@@ -27,7 +27,8 @@
 python manage.py dumpdata products  --format json --indent 4 > products/fixtures/products.json
 ```
 
-5. recommendation
+## recommendation
+1. recommendation
 ```python
 for user, products in train_set.items():
     for product in products:
