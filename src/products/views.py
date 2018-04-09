@@ -92,7 +92,7 @@ class ProductFeaturedListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         request = self.request
-        return  Product.objects.all().featured()
+        return Product.objects.all().featured()
 
 
 class ProductFeaturedDetailView(ObjectViewedMixin, DetailView):

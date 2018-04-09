@@ -32,7 +32,9 @@ class UserBasedCF(object):
         print('train set = %s' % train_set_len, file=sys.stderr)
 
     def calc_user_sim(self):
-        ''' calculate user similarity matrix '''
+        """
+        calculate user similarity matrix
+        """
 
         print('building product-users inverse table...', file=sys.stderr)
         product2users = dict()
@@ -71,8 +73,6 @@ class UserBasedCF(object):
         print('Total similarity factor number = %d' % simfactor_count, file=sys.stderr)
 
     def recommend(self, user):
-        self.generate_dataset()
-        self.calc_user_sim()
         """
         Find K similar users and recommend N products.
 
@@ -82,6 +82,9 @@ class UserBasedCF(object):
          (<Product: lunch>, 0.2581988897471611),
          (<Product: siren>, 0.2581988897471611)]
         """
+        self.generate_dataset()
+        self.calc_user_sim()
+
         K = self.n_sim_user
         N = self.n_rec_product
         rank = dict()

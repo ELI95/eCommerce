@@ -66,6 +66,7 @@ urlpatterns = [
     url(r'^addresses/create/$', AddressCreateView.as_view(), name='address-create'),
     url(r'^addresses/(?P<pk>\d+)/$', AddressUpdateView.as_view(), name='address-update'),
     url(r'^library/$', LibraryView.as_view(), name='library'),
+    url(r'^recommendations/', include('recommendations.urls', namespace='recommendations')),
 ]
 
 
