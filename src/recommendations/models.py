@@ -18,6 +18,9 @@ class UserProductRating(models.Model):
     def __str__(self):
         return '%s--%s' %(self.user, self.product)
 
+    class Meta:
+        ordering = ['timestamp']
+
 
 def post_save_product_purchase_receiver(sender, instance, created, *args, **kwargs):
     if created:

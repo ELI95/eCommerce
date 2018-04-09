@@ -75,12 +75,6 @@ class UserBasedCF(object):
     def recommend(self, user):
         """
         Find K similar users and recommend N products.
-
-        [(<Product: tea>, 0.7415816237971964),
-         (<Product: class>, 0.5915322230804945),
-         (<Product: breakfast>, 0.2581988897471611),
-         (<Product: lunch>, 0.2581988897471611),
-         (<Product: siren>, 0.2581988897471611)]
         """
         self.generate_dataset()
         self.calc_user_sim()
