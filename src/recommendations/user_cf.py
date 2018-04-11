@@ -81,17 +81,21 @@ class UserBasedCF(object):
 
         K = self.n_sim_user
         N = self.n_rec_product
-        rank = dict()
-        purchased_products = self.train_set[user.id]
 
-        for similar_user, similarity_factor in sorted(self.user_sim_mat[user.id].items(),
-                                                      key=itemgetter(1), reverse=True)[0:K]:
-            for product in self.train_set[similar_user]:
-                if product in purchased_products:
-                    continue
-                rank.setdefault(product, 0)
-                rank[product] += similarity_factor
-        return sorted(rank.items(), key=itemgetter(1), reverse=True)[0:N]
+        if user.id in self.train_set:
+            rank = dict()
+            purchased_products = self.train_set[user.id]
+
+            for similar_user, similarity_factor in sorted(self.user_sim_mat[user.id].items(),
+                                                          key=itemgetter(1), reverse=True)[0:K]:
+                for product in self.train_set[similar_user]:
+                    if product in purchased_products:
+                        continue
+                    rank.setdefault(product, 0)
+                    rank[product] += similarity_factor
+            return sorted(rank.items(), key=itemgetter(1), reverse=True)[0:N]
+        else:
+            return sorted(self.product_popular.items(), key=itemgetter(1), reverse=True)[0:N]
 
 
 if __name__ == '__main__':

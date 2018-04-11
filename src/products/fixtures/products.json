@@ -7,8 +7,9 @@
         "slug": "super",
         "description": "super is good",
         "price": "12.22",
-        "image": "products/7919267312612/7919267312612.png",
+        "image": "products/1217690512/1217690512.jpg",
         "featured": false,
+        "is_digital": true,
         "active": true
     }
 },
@@ -20,21 +21,9 @@
         "slug": "lunch",
         "description": "lunch is important",
         "price": "12.22",
-        "image": "products/2141040077156/2141040077156.png",
+        "image": "products/5787942534/5787942534.jpg",
         "featured": true,
-        "active": true
-    }
-},
-{
-    "model": "products.product",
-    "pk": 3,
-    "fields": {
-        "title": "breakfast",
-        "slug": "breakfast",
-        "description": "Father leaves for work in the morning after breakfast.",
-        "price": "39.99",
-        "image": "products/8987027015292/8987027015292.png",
-        "featured": false,
+        "is_digital": false,
         "active": true
     }
 },
@@ -46,8 +35,9 @@
         "slug": "tea",
         "description": "hello, i am tea ~",
         "price": "10.00",
-        "image": "products/3313625271/3313625271.png",
+        "image": "products/2553997636/2553997636.jpg",
         "featured": true,
+        "is_digital": true,
         "active": true
     }
 },
@@ -59,8 +49,9 @@
         "slug": "siren-47wx",
         "description": "i  have no image ~",
         "price": "39.99",
-        "image": "",
+        "image": "products/1757703259/1757703259.jpg",
         "featured": true,
+        "is_digital": false,
         "active": true
     }
 },
@@ -72,8 +63,9 @@
         "slug": "featured_product",
         "description": "i am featured ~",
         "price": "39.99",
-        "image": "",
+        "image": "products/2079422186/2079422186.jpg",
         "featured": true,
+        "is_digital": true,
         "active": true
     }
 },
@@ -85,8 +77,9 @@
         "slug": "title-to-generate-slug-yrz3",
         "description": "title to generate slug ~",
         "price": "39.99",
-        "image": "",
+        "image": "products/2358567659/2358567659.jpg",
         "featured": true,
+        "is_digital": false,
         "active": true
     }
 },
@@ -98,9 +91,82 @@
         "slug": "sauce",
         "description": "flavorful relish or dressing or topping served as an accompaniment to food",
         "price": "2.00",
-        "image": "products/8802286772/8802286772.jpg",
+        "image": "products/9941546180/9941546180.jpg",
         "featured": false,
+        "is_digital": false,
         "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "breakfast",
+        "slug": "breakfast",
+        "description": "i am breakfast",
+        "price": "39.99",
+        "image": "products/9669626518/9669626518.jpg",
+        "featured": true,
+        "is_digital": true,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "class",
+        "slug": "class",
+        "description": "i am class",
+        "price": "39.99",
+        "image": "products/9720542813/9720542813.jpg",
+        "featured": false,
+        "is_digital": false,
+        "active": true
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "title": "hot",
+        "slug": "hot",
+        "description": "i am hot",
+        "price": "39.99",
+        "image": "products/7401305460/7401305460.jpg",
+        "featured": false,
+        "is_digital": false,
+        "active": true
+    }
+},
+{
+    "model": "products.productfile",
+    "pk": 3,
+    "fields": {
+        "product": 4,
+        "file": "product/tea/LinuxProbe.pdf",
+        "free": false,
+        "user_required": false
+    }
+},
+{
+    "model": "products.productfile",
+    "pk": 5,
+    "fields": {
+        "product": 9,
+        "file": "product/breakfast/effective-python-59-specific-ways-to-write-better-python.pdf",
+        "free": false,
+        "user_required": false
+    }
+},
+{
+    "model": "products.productfile",
+    "pk": 6,
+    "fields": {
+        "product": 6,
+        "file": "product/featured_product/LinuxProbe.pdf",
+        "free": false,
+        "user_required": false
     }
 }
 ]

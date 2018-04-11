@@ -77,18 +77,22 @@ class ItemBasedCF(object):
 
         K = self.n_sim_product
         N = self.n_rec_product
-        rank = {}
-        purchased_products = self.train_set[user.id]
 
-        for product, rating in purchased_products.items():
-            for related_product, similarity_factor in sorted(self.product_sim_mat[product].items(),
-                                                             key=itemgetter(1), reverse=True)[:K]:
-                if related_product in purchased_products:
-                    continue
-                rank.setdefault(related_product, 0)
-                rank[related_product] += similarity_factor * rating
+        if user.id in self.train_set:
+            rank = {}
+            purchased_products = self.train_set[user.id]
 
-        return sorted(rank.items(), key=itemgetter(1), reverse=True)[:N]
+            for product, rating in purchased_products.items():
+                for related_product, similarity_factor in sorted(self.product_sim_mat[product].items(),
+                                                                 key=itemgetter(1), reverse=True)[:K]:
+                    if related_product in purchased_products:
+                        continue
+                    rank.setdefault(related_product, 0)
+                    rank[related_product] += similarity_factor * rating
+
+            return sorted(rank.items(), key=itemgetter(1), reverse=True)[:N]
+        else:
+            return sorted(self.product_popular.items(), key=itemgetter(1), reverse=True)[0:N]
 
 
 if __name__ == '__main__':
