@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - ./mysqldb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql123456
+      - MYSQL_DATABASE=eCommerce
+
+  web:
+    build: .
+    working_dir: /code/src
+    command: bash -c "sleep 30 && python manage.py collectstatic --noinput
+                      && python manage.py makemigrations  && python manage.py migrate
+                      && python manage.py loaddata products/fixtures/products.json
+                      && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
