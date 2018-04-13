@@ -1,4 +1,4 @@
 ## To Do
-- [X] deploy with docker
-- [X] add recommendation system
 - [X] add basic eCommerce functions
+- [X] add recommendation system
+- [X] deploy with docker
