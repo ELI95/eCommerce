@@ -18,10 +18,21 @@ services:
     command: bash -c "sleep 30 && python manage.py collectstatic --noinput
                       && python manage.py makemigrations  && python manage.py migrate
                       && python manage.py loaddata products/fixtures/products.json
-                      && python manage.py runserver 0.0.0.0:8000"
+                      && echo "from django.contrib.auth import get_user_model; \
+                               User = get_user_model(); \
+                               User.objects.create_superuser('admin@gmail.com', password='mydjango')" | python manage.py shell
+                      && gunicorn --config=gunicorn_config.py ecommerce.wsgi:application"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    links:
+      - web:web
