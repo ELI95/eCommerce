@@ -20,13 +20,9 @@ class MarketingPreference(models.Model):
 def marketing_pref_update_receiver(sender, instance, *args, **kwargs):
     if instance.subscribed != instance.mailchimp_subscribed:
         if instance.subscribed:
-            # subscribing user
             status_code, response_data = Mailchimp().subscribe(instance.user.email)
-            print(status_code, response_data)
         else:
-            # unsubscribing user
             status_code, response_data = Mailchimp().unsubscribe(instance.user.email)
-            print(status_code, response_data)
 
         if response_data['status'] == 'subscribed':
             instance.subscribed = True
@@ -51,9 +47,6 @@ post_save.connect(marketing_pref_create_receiver, sender=MarketingPreference)
 
 
 def make_marketing_pref_receiver(sender, instance, created, *args, **kwargs):
-    '''
-    User model
-    '''
     if created:
         MarketingPreference.objects.get_or_create(user=instance)
 

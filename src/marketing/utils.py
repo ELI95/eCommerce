@@ -27,9 +27,9 @@ def check_email(email):
 
 
 def get_subscriber_hash(member_email):
-    '''
+    """
     This makes a email hash which is required by the Mailchimp API
-    '''
+    """
     check_email(member_email)
     member_email = member_email.lower().encode()
     m = hashlib.md5(member_email)
@@ -61,7 +61,6 @@ class Mailchimp(object):
     def change_subscription_status(self, email, status='unsubscribed'):
         hashed_email = get_subscriber_hash(email)
         endpoint = self.get_members_endpoint() + "/" + hashed_email
-        print(endpoint)
         data = {
             "email_address": email,
             "status": self.check_valid_status(status)

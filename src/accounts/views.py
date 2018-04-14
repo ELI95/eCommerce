@@ -56,7 +56,6 @@ class AccountEmailActivateView(FormMixin, View):
         return render(request, 'registration/activation-error.html', context)
 
     def post(self, request, *args, **kwargs):
-        # create form to receive an email
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)

@@ -1,10 +1,9 @@
 from itertools import chain
 
-from django.shortcuts import render
 from django.views.generic import ListView
 
 from products.models import Product
-from tags.models import Tag
+# from tags.models import Tag
 
 
 class SearchProductView(ListView):
